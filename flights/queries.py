@@ -1,7 +1,7 @@
 from flights import get_db
 
 
-def show_all_airports():
+def get_all_airports():
     """Returns all airports from the database."""
     db = get_db()
     result = db.run(
@@ -12,6 +12,11 @@ def show_all_airports():
     data = []
     for record in result:
         data.append(
-            f"Name: {record['Airline']} - IATA: {record['IATA']} - ICAO: {record['ICAO']} - Country: {record['Country']}"
+            {
+             'Name': record['Airline'],
+             'IATA': record['IATA'],
+             'ICAO': record['ICAO'],
+             'Country': record['Country']
+             }
         )
     return data

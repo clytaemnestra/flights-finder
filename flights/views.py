@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from .queries import show_all_airports
+from .queries import get_all_airports
 
 app = Blueprint("app", __name__)
 
@@ -17,7 +17,7 @@ def results():
 
 
 @app.route("/all-airports")
-def homepage():
-    """Shows homepage with input fields for queries."""
-    all_airports = show_all_airports()
-    return render_template("airports.html", all_airports=all_airports)
+def show_all_airports():
+    """Shows list of all airports."""
+    airports = get_all_airports()
+    return render_template("airports.html", airports=airports)

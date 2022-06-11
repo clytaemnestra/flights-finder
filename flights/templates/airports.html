@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All Airports
+{% endblock %}
+
+{% block main %}
+
+<h1>All airports</h1>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>IATA</th>
+            <th>ICAO</th>
+            <th>Country</th>
+        </tr>
+        {% for item in airports: %}
+        <tr>
+            <td>{{ item['Name'] }}</td>
+            <td>{{ item['IATA'] }}</td>
+            <td>{{ item['ICAO'] }}</td>
+            <td>{{ item['Country'] }}</td>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
