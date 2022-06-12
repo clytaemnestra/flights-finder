@@ -46,6 +46,28 @@ def find_shortest_path(origin, destination):
     path += destination
     if path.endswith('-> '):
         path = path[:-3]
-    print(path)
     return path
 
+
+def get_businest_airports():
+    "Returns list of busiest airports by number of flights."
+    db = get_db()
+    query = (
+        "MATCH (airport:Airport)<-[:DEPARTS_AT]-(f:Flight) "
+        "WITH airport, count(f) as departures "
+        "MATCH (f2:Flight)-[:ARRIVES_AT]->(airport)"
+        "RETURN airport.name as airport_name, departures, "
+        "count(f2) as arrivals "
+        "ORDER BY departures DESC"
+    )
+    result = db.run(query)
+    airports = []
+    for record in result:
+        airports.append(
+            {
+                'Name': record['airport_name'],
+                'Departures': record['departures'],
+                'Arrivals': record['arrivals'],
+            }
+        )
+    return airports

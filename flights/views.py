@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
-from .queries import get_all_airlines, find_shortest_path
+from .queries import get_all_airlines, find_shortest_path, get_businest_airports
 
 app = Blueprint("app", __name__)
 
@@ -27,3 +27,11 @@ def show_all_airports():
     """Shows list of all airlines."""
     airlines = get_all_airlines()
     return render_template("airlines.html", airlines=airlines)
+
+
+@app.route("/busiest-airports")
+def show_busiest_airports():
+    "Shows list of busiest airports"
+    busiest_airports = get_businest_airports()
+    return render_template("busiest-airports.html", busiest_airports=busiest_airports)
+    # return redirect("/")

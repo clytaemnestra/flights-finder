@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Busiest Airports
+{% endblock %}
+
+{% block main %}
+
+<h1>Busiest Airports</h1>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Departures</th>
+            <th>Arrivals</th>
+        </tr>
+        {% for item in busiest_airports: %}
+        <tr>
+            <td>{{ item['Name'] }}</td>
+            <td>{{ item['Departures'] }}</td>
+            <td>{{ item['Arrivals'] }}</td>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
