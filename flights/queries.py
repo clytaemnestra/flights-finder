@@ -13,10 +13,10 @@ def get_all_airlines():
     for record in result:
         data.append(
             {
-                'Name': record['Airline'],
-                'IATA': record['IATA'],
-                'ICAO': record['ICAO'],
-                'Country': record['Country']
+                "Name": record["Airline"],
+                "IATA": record["IATA"],
+                "ICAO": record["ICAO"],
+                "Country": record["Country"],
             }
         )
     return data
@@ -25,16 +25,18 @@ def get_all_airlines():
 def find_shortest_path(origin, destination):
     """Returns shortest flights from given origin to given destination."""
     db = get_db()
-    query = "MATCH p=shortestpath((src:Airport{{city: '{origin}'}})-[*..15]"\
-        "-(dest:Airport{{city: '{destination}'}})) "\
-        "WHERE ALL (i in range(0, size(relationships(p))-2) "\
-        "WHERE (relationships(p)[i]).date < (relationships(p)[i+1]).date) "\
+    query = (
+        "MATCH p=shortestpath((src:Airport{{city: '{origin}'}})-[*..15]"
+        "-(dest:Airport{{city: '{destination}'}})) "
+        "WHERE ALL (i in range(0, size(relationships(p))-2) "
+        "WHERE (relationships(p)[i]).date < (relationships(p)[i+1]).date) "
         "RETURN p".format(origin=origin, destination=destination)
+    )
 
     result = db.run(query)
     path = ""
     for item in result:
-        path = item['p']
+        path = item["p"]
     relationships = path.relationships
     nodes = path.nodes
     path = ""
@@ -44,12 +46,12 @@ def find_shortest_path(origin, destination):
         else:
             path += f'Flight: {nodes[i]["number"]}, Arrival time: {relationships[i]["date"]} -> '
     path += destination
-    if path.endswith('-> '):
+    if path.endswith("-> "):
         path = path[:-3]
     return path
 
 
-def get_businest_airports():
+def get_busiest_airports():
     "Returns list of busiest airports by number of flights."
     db = get_db()
     query = (
@@ -65,9 +67,9 @@ def get_businest_airports():
     for record in result:
         airports.append(
             {
-                'Name': record['airport_name'],
-                'Departures': record['departures'],
-                'Arrivals': record['arrivals'],
+                "Name": record["airport_name"],
+                "Departures": record["departures"],
+                "Arrivals": record["arrivals"],
             }
         )
     return airports

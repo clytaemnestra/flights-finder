@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect
-from .queries import get_all_airlines, find_shortest_path, get_businest_airports
+from flask import Blueprint, render_template, request
+from .queries import get_all_airlines, find_shortest_path, get_busiest_airports
 
 app = Blueprint("app", __name__)
 
@@ -13,8 +13,8 @@ def homepage():
 @app.route("/results", methods=["GET", "POST"])
 def results():
     """Shows the fastest flight connections for given queries."""
-    origin = request.form.get('origin')
-    destination = request.form.get('destination')
+    origin = request.form.get("origin")
+    destination = request.form.get("destination")
     try:
         shortest_path = find_shortest_path(origin=origin, destination=destination)
         return render_template("flights.html", shortest_path=shortest_path)
@@ -32,6 +32,5 @@ def show_all_airports():
 @app.route("/busiest-airports")
 def show_busiest_airports():
     "Shows list of busiest airports"
-    busiest_airports = get_businest_airports()
+    busiest_airports = get_busiest_airports()
     return render_template("busiest-airports.html", busiest_airports=busiest_airports)
-    # return redirect("/")

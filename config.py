@@ -8,7 +8,6 @@ class Config(object):
     CSFR_ENABLED = True
 
 
-
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
