@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    All Airports
+    All Airlines
 {% endblock %}
 
 {% block main %}
 
-<h1>All airports</h1>
+<h1>All airlines</h1>
 <div class="table-responsive">
     <table class="table">
         <tr>
@@ -15,7 +15,7 @@
             <th>ICAO</th>
             <th>Country</th>
         </tr>
-        {% for item in airports: %}
+        {% for item in airlines: %}
         <tr>
             <td>{{ item['Name'] }}</td>
             <td>{{ item['IATA'] }}</td>

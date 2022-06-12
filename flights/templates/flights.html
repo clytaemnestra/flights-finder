@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shortest flights from origin to destination airports
+{% endblock %}
+
+{% block main %}
+
+<h1>The fastest flight connection for the given origin & destination: </h1>
+<p>{{ shortest_path }}</p>
+
+{% endblock %}

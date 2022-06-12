@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shortest flights finder
+{% endblock %}
+
+{% block main %}
+    <h1>Enter origin and destination city</h1>
+    <form action="/results" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="origin" placeholder="Origin" type="text">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="destination" placeholder="Destination" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+{% endblock %}
